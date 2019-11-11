@@ -1,0 +1,37 @@
+# thuc don
+type Recipe{
+    id: Int!
+    name: String!
+    # thu tuc
+    procedure: String!
+    ingredients: [Ingredient!]!
+}
+
+# thanh phan
+type Ingredient{
+    id: Int!
+    name: String!
+    recipeId: Int!
+}
+
+input NewRecipe{
+    name: String!
+    procedure: String
+}
+
+input NewIngredient{
+    name: String!
+}
+
+# read data
+type Query{
+    recipes(search: String = ""): [Recipe!]!
+}
+
+# write data
+type Mutation{
+    createRecipe(input: NewRecipe, ingredients: [NewIngredient]): Recipe!
+    updateRecipe(id: Int, input: NewRecipe, ingredients: [NewIngredient] = []): Recipe!
+    deleteRecipe(id: Int): [Recipe!]!
+}
+
